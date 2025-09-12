@@ -1,0 +1,152 @@
+/* Container */
+.dashboard-container {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0D0D0D, #1A1A1A);
+  color: #E0E0E0;
+  position: relative;
+}
+
+/* Top Navbar */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.top-nav .logo {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(90deg,#ff6ec4,#7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.top-nav .nav-icons span {
+  margin-left: 15px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* hidden by default */
+  width: 250px;
+  height: 100%;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  padding-top: 60px;
+  box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 1100;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar ul li:hover {
+  background: rgba(255,110,196,0.2);
+  color: #ff6ec4;
+}
+
+/* Main content */
+.main-content {
+  padding: 30px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.shifted {
+  margin-left: 250px;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 1050;
+}
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #ff6ec4, #7873f5);
+  padding: 40px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.hero-section h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.hero-section p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.hero-btn {
+  padding: 12px 30px;
+  background: #0D0D0D;
+  color: #ff6ec4;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.hero-btn:hover {
+  background: #ff6ec4;
+  color: #0D0D0D;
+}
+
+/* Dashboard Cards */
+.dashboard-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 20px;
+  flex: 1;
+  min-width: 200px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}

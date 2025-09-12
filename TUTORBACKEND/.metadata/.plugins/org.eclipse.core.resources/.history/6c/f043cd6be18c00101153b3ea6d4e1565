@@ -1,0 +1,23 @@
+package com.tutorfinder.service;
+
+import com.tutorfinder.model.User;
+import com.tutorfinder.repository.UserRepository;
+
+public class UserService {
+	
+	private UserRepository userRepository;
+	
+	public User registerUser(User user) {
+		
+		//check duplicate email
+		if(userRepository.findByEmail(user.getEmail()).isPresent()){
+			throw new RuntimeException("Email already exists!");
+		}
+		
+		//role-specific checks
+		if("admin".equalsIgnoreCase(user.getRole())) {
+			if(user.getAdminCode())
+		}
+	}
+	
+}

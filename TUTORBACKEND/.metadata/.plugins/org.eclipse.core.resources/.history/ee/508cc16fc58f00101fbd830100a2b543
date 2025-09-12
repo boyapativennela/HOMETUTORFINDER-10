@@ -1,0 +1,32 @@
+package com.tutorfinder.controller;
+
+import com.tutorfinder.model.TutorProfile;
+import com.tutorfinder.service.TutorProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/tutors/profile")  // <-- matches frontend
+@CrossOrigin(origins = "http://localhost:5173")
+public class TutorProfileController {
+
+    @Autowired
+    private TutorProfileService tutorProfileService;
+
+    @PostMapping("/{userId}")
+    public TutorProfile createProfile(@PathVariable Long userId, @RequestBody TutorProfile profile) {
+        return tutorProfileService.createProfile(userId, profile);
+    }
+
+    @PutMapping("/{userId}")
+    public TutorProfile updateProfile(@PathVariable Long userId, @RequestBody TutorProfile profile) {
+        return tutorProfileService.updateProfile(userId, profile);
+    }
+
+    @GetMapping("/{userId}")
+    public Optional<TutorProfile> getProfile(@PathVariable Long userId) {
+        return tutorProfileService.getProfile(userId);
+    }
+}

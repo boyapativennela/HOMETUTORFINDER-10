@@ -1,0 +1,12 @@
+package com.tutorfinder.service;
+
+public class UserService {
+	
+	private UserRepository userRepository;
+	
+	public User registerUser(User user) {
+		
+		//check duplicate email
+	}
+	
+}

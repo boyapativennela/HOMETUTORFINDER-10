@@ -1,0 +1,25 @@
+package com.tutorfinder.model;
+
+public class User {
+	private Long id;
+	private String email;
+	private String password;
+	private String phone;
+	private String role;
+	private String qualification;
+	private String adminCode;
+	
+	public User() {
+	}
+	 public User(String name, String email, String password, String phone, String role, String qualification, String adminCode) {
+	        this.name = name;
+	        this.email = email;
+	        this.password = password;
+	        this.phone = phone;
+	        this.role = role;
+	        this.qualification = qualification;
+	        this.adminCode = adminCode;
+	    }
+	
+	
+}

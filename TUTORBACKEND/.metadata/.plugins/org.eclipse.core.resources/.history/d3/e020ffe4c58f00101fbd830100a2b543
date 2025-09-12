@@ -1,0 +1,47 @@
+package com.tutorfinder.service;
+
+import com.tutorfinder.model.TutorProfile;
+import com.tutorfinder.model.User;
+import com.tutorfinder.repository.TutorProfileRepository;
+import com.tutorfinder.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class TutorProfileService {
+
+    @Autowired
+    private TutorProfileRepository tutorProfileRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public TutorProfile createProfile(Long userId, TutorProfile profile) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        profile.setUser(user);
+        return tutorProfileRepository.save(profile);
+    }
+
+    public TutorProfile updateProfile(Long userId, TutorProfile updatedProfile) {
+        TutorProfile existingProfile = tutorProfileRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Profile not found"));
+
+        existingProfile.setSubjects(updatedProfile.getSubjects());
+        existingProfile.setExperience(updatedProfile.getExperience());
+        existingProfile.setBio(updatedProfile.getBio());
+        existingProfile.setHourlyRate(updatedProfile.getHourlyRate());
+        existingProfile.setLocation(updatedProfile.getLocation());
+        existingProfile.setAvailability(updatedProfile.getAvailability());
+
+        return tutorProfileRepository.save(existingProfile);
+    }
+
+    public Optional<TutorProfile> getProfile(Long userId) {
+        return tutorProfileRepository.findByUserId(userId);
+    }
+}
+=
