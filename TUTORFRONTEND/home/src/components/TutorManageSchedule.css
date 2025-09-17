@@ -1,0 +1,41 @@
+.manage-schedule-container {
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.booking-list {
+  list-style: none;
+  padding: 0;
+}
+
+.booking-card {
+  background: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.actions {
+  margin-top: 10px;
+}
+
+.accept-btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-right: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.decline-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}

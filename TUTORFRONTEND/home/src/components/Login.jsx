@@ -4,9 +4,8 @@ import API_BASE_URL from "../config";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
-
 const Login = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,14 +19,22 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${API_BASE_URL}/auth/login`, formData);
-      alert("Login successful!");
-      console.log("Logged in user:", response.data);
       const user = response.data;
-      // save user in localStorage
+
+      if (!user.id) {
+        alert("Login failed: No user ID returned from backend!");
+        console.error("Invalid login response:", user);
+        return;
+      }
+
+      alert("Login successful!");
+      console.log("Logged in user:", user);
+
+      // ✅ Save complete user object in localStorage
       localStorage.setItem("user", JSON.stringify(user));
 
-      //after login redirect to respective dashboard.
-      if(user.role==="student") navigate("/student-dashboard");
+      // ✅ Redirect to role-specific dashboard
+      if (user.role === "student") navigate("/student-dashboard");
       else if (user.role === "tutor") navigate("/tutor-dashboard");
       else if (user.role === "admin") navigate("/admin-dashboard");
     } catch (err) {
@@ -40,26 +47,24 @@ const Login = () => {
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit} className="login-form">
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+
         <button type="submit" className="login-btn">Login</button>
       </form>
     </div>

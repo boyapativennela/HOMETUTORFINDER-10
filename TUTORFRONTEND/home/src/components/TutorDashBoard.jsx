@@ -1,70 +1,49 @@
 import React, { useState } from "react";
-import "./TutorDashboard.css";
-import { Link } from "react-router-dom";
-import {
-  FaBars,
-  FaChalkboardTeacher,
-  FaCalendarAlt,
-  FaUserGraduate,
-  FaMoneyBill,
-} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import "./StudentDashboard.css"; // Use the same CSS as StudentDashboard
 
 const TutorDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    <div className="tutor-dashboard">
-      {/* Navbar */}
-      <nav className="navbar">
-        <h1 className="logo">TutorFinder</h1>
-        <button
-          className="menu-btn"
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-        >
-          <FaBars />
-        </button>
+    <div className="dashboard-container">
+      {/* Sidebar */}
+      <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+        <ul>
+          <li onClick={() => navigate("/tutor-profile")}>👤 My Profile</li>
+          <li onClick={() => navigate("/manage-schedule")}>📅 Manage Schedule</li>
+          <li onClick={() => navigate("/my-students")}>🎓 My Students</li>
+          <li onClick={() => navigate("/earnings")}>💰 Earnings</li>
+        </ul>
+      </div>
+
+      {sidebarOpen && <div className="overlay" onClick={toggleSidebar}></div>}
+
+      {/* Top Navbar */}
+      <nav className="top-nav">
+        <div className="logo">TutorFinder</div>
+        <span className="sidebar-toggle" onClick={toggleSidebar}>
+          ☰
+        </span>
       </nav>
 
-      {/* Sidebar */}
-      <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-        <ul>
-          <li>
-            <Link to="/tutor-profile">
-              <FaChalkboardTeacher /> Profile
-            </Link>
-          </li>
-          <li>
-            <Link to="/manage-schedule">
-              <FaCalendarAlt /> Manage Schedule
-            </Link>
-          </li>
-          <li>
-            <Link to="/my-students">
-              <FaUserGraduate /> My Students
-            </Link>
-          </li>
-          <li>
-            <Link to="/earnings">
-              <FaMoneyBill /> Earnings
-            </Link>
-          </li>
-        </ul>
-      </aside>
-
       {/* Main Content */}
-      <main className="content">
-        <section className="hero">
-          <h2>Welcome, Tutor!</h2>
-          <p>Manage your profile, schedule, and students all in one place.</p>
+      <div className={`main-content ${sidebarOpen ? "shifted" : ""}`}>
+        <section className="hero-section">
+          <h1>Welcome Back, Tutor!</h1>
+          <p>Manage your profile, schedule, students, and earnings all in one place.</p>
         </section>
 
-        <section className="cards">
+        <section className="dashboard-cards">
           <div className="card">
-            <h3>Profile</h3>
+            <h3>My Profile</h3>
             <p>Update your bio, subjects, qualifications, and fees.</p>
           </div>
           <div className="card">
-            <h3>Schedule</h3>
+            <h3>Manage Schedule</h3>
             <p>Set your available time slots for students.</p>
           </div>
           <div className="card">
@@ -76,7 +55,7 @@ const TutorDashboard = () => {
             <p>Track your total income from bookings.</p>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 };

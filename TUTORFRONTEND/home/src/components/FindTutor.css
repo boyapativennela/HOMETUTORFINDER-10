@@ -1,0 +1,128 @@
+/* General */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #0D0D0D;
+  color: #E0E0E0;
+  overflow-x: hidden;
+}
+
+/* Page container */
+.find-tutors-page {
+  padding: 120px 5% 50px; /* top padding to account for fixed navbar */
+  min-height: 100vh;
+  background-color: #0D0D0D;
+}
+
+/* Page title */
+.find-tutors-page h2 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 30px;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Filter input */
+.filter-input {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 20px;
+  margin: 0 auto 40px auto;
+  display: block;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #E0E0E0;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.filter-input::placeholder {
+  color: #888;
+}
+
+.filter-input:focus {
+  background: rgba(120, 115, 245, 0.15);
+  box-shadow: 0 0 10px rgba(120, 115, 245, 0.5);
+}
+
+/* Tutor list container */
+.tutor-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+/* Tutor card */
+.tutor-card {
+  flex: 1 1 280px;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 25px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tutor-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 35px rgba(120, 115, 245, 0.6);
+}
+
+.tutor-card h3 {
+  font-size: 22px;
+  margin-bottom: 5px;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tutor-card p {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+/* Book button */
+.tutor-card button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tutor-card button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 110, 196, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .tutor-list {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tutor-card {
+    flex: 1 1 100%;
+  }
+  .filter-input {
+    max-width: 100%;
+  }
+  .find-tutors-page h2 {
+    font-size: 28px;
+  }
+}

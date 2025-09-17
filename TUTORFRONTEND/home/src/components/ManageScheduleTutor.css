@@ -1,0 +1,62 @@
+.manage-schedule-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+}
+
+.manage-schedule-page h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4b0082;
+}
+
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.booking-card {
+  background: #f7f7f7;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.booking-card p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.booking-card button {
+  margin-left: 10px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.booking-card button:first-child {
+  background-color: #4caf50;
+  color: white;
+}
+
+.booking-card button:first-child:hover {
+  background-color: #388e3c;
+}
+
+.booking-card button:last-child {
+  background-color: #f44336;
+  color: white;
+}
+
+.booking-card button:last-child:hover {
+  background-color: #d32f2f;
+}

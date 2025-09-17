@@ -6,15 +6,6 @@ function FirstPage() {
   return (
     <div className="firstpage">
       {/* Navbar */}
-      <nav className="navbar">
-        <h1 className="logo">TutorFinder</h1>
-            <ul className="nav-links">
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/register">Register</Link></li> 
-                <li><Link to="/about">About</Link></li>
-            </ul>
-      </nav>
 
       {/* Hero Section */}
       <section className="hero" id="home">
@@ -44,21 +35,27 @@ function FirstPage() {
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section className="reviews">
-        <h3>What Students Say</h3>
-        <div className="review-boxes">
-          <div className="review">
-            <p>"I found the perfect Math tutor in minutes!"</p>
-            <span>- Ananya</span>
+      {/* Top Tutors Section */}
+      <section className="top-tutors">
+        <h3>Meet Our Top Tutors</h3>
+        <div className="tutor-cards">
+          <div className="tutor-card">
+            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Tutor" />
+            <h4>Ms. Ananya Sharma</h4>
+            <p>Math Specialist</p>
+            <button className="view-profile-btn">View Profile</button>
           </div>
-          <div className="review">
-            <p>"The scheduling feature is super convenient."</p>
-            <span>- Rahul</span>
+          <div className="tutor-card">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Tutor" />
+            <h4>Mr. Rahul Verma</h4>
+            <p>Physics Expert</p>
+            <button className="view-profile-btn">View Profile</button>
           </div>
-          <div className="review">
-            <p>"High-quality tutors and very affordable."</p>
-            <span>- Sneha</span>
+          <div className="tutor-card">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Tutor" />
+            <h4>Ms. Sneha Kapoor</h4>
+            <p>Chemistry Tutor</p>
+            <button className="view-profile-btn">View Profile</button>
           </div>
         </div>
       </section>
