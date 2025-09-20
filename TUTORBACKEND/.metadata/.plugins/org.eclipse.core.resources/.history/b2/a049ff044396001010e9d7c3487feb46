@@ -1,0 +1,43 @@
+package com.tutorfinder.model;
+
+import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
+@Table(name = "bookings")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Booking {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "student_id", nullable = false)
+    private Long studentId;
+
+    @Column(name = "tutor_id", nullable = false)
+    private Long tutorId; // only tutor_id
+
+    @Column(nullable = false)
+    private String status; // pending | accepted | declined
+
+    public Booking() {}
+
+    public Booking(Long studentId, Long tutorId, String status) {
+        this.studentId = studentId;
+        this.tutorId = tutorId;
+        this.status = status;
+    }
+
+    // Getters and Setters
+    public Long getId() { return id; }
+
+    public Long getStudentId() { return studentId; }
+    public void setStudentId(Long studentId) { this.studentId = studentId; }
+
+    public Long getTutorId() { return tutorId; }
+    public void setTutorId(Long tutorId) { this.tutorId = tutorId; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+}

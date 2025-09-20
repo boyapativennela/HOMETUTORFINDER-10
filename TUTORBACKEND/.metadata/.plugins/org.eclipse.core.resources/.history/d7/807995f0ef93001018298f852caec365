@@ -1,0 +1,24 @@
+package com.tutorfinder.service;
+
+import com.tutorfinder.dto.TutorProfileDTO;
+import com.tutorfinder.model.TutorProfile;
+import com.tutorfinder.model.User;
+import com.tutorfinder.repository.TutorProfileRepository;
+import com.tutorfinder.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+public class TutorProfileService {
+
+    @Autowired
+    private TutorProfileRepository tutorProfileRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    }

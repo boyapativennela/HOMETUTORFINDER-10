@@ -1,0 +1,55 @@
+package com.tutorfinder.controller;
+
+import com.tutorfinder.model.Booking;
+import com.tutorfinder.model.TutorProfile;
+import com.tutorfinder.repository.TutorProfileRepository;
+import com.tutorfinder.service.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/bookings")
+@CrossOrigin(origins = "http://localhost:5173")
+public class BookingController {
+
+    @Autowired
+    private BookingService bookingService;
+
+    @Autowired
+    private TutorProfileRepository tutorProfileRepository;
+
+    // Book a session
+    @PostMapping("/book")
+    public ResponseEntity<Booking> bookSession(@RequestBody Booking booking) {
+        booking.setStatus("pending");
+        return ResponseEntity.ok(bookingService.bookSession(booking));
+    }
+
+    // Get bookings by tutor profile id
+    @GetMapping("/tutor/{tutorId}")
+    public ResponseEntity<List<Booking>> getTutorBookings(@PathVariable Long tutorId) {
+        return ResponseEntity.ok(bookingService.getTutorBookings(tutorId));
+    }
+
+    // NEW: Get bookings by logged-in userId
+    @GetMapping("/tutor/user/{userId}")
+    public ResponseEntity<List<Booking>> getTutorBookingsByUserId(@PathVariable Long userId) {
+        TutorProfile profile = tutorProfileRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Tutor profile not found"));
+        Long tutorId = profile.getId(); // tutor_profiles.id
+        return ResponseEntity.ok(bookingService.getTutorBookings(tutorId));
+    }
+
+    // Update booking status
+    @PutMapping("/{bookingId}")
+    public ResponseEntity<Booking> updateStatus(
+            @PathVariable Long bookingId,
+            @RequestBody Booking updatedBooking
+    ) {
+        Booking updated = bookingService.updateBookingStatus(bookingId, updatedBooking.getStatus());
+        return ResponseEntity.ok(updated);
+    }
+}

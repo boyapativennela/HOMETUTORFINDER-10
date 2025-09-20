@@ -1,0 +1,49 @@
+package com.tutorfinder.controller;
+
+import com.tutorfinder.model.Booking;
+import com.tutorfinder.service.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/bookings")
+@CrossOrigin(origins = "http://localhost:5173")
+public class BookingController {
+
+    @Autowired
+    private BookingService bookingService;
+
+    @PostMapping("/book")
+    public ResponseEntity<Booking> bookSession(@RequestBody Booking booking) {
+        Booking saved = bookingService.bookSession(booking);
+        return ResponseEntity.ok(saved);
+    }
+
+    @GetMapping("/tutor/{tutorId}")
+    public ResponseEntity<List<Booking>> getTutorBookings(@PathVariable Long tutorId) {
+        return ResponseEntity.ok(bookingService.getTutorBookings(tutorId));
+    }
+
+    @GetMapping("/student/{studentId}")
+    public ResponseEntity<List<Booking>> getStudentBookings(@PathVariable Long studentId) {
+        return ResponseEntity.ok(bookingService.getStudentBookings(studentId));
+    }
+
+    @PutMapping("/accept/{bookingId}")
+    public ResponseEntity<Booking> acceptBooking(@PathVariable Long bookingId) {
+        Booking updated = bookingService.updateBookingStatus(bookingId, "accepted");
+        return ResponseEntity.ok(updated);
+        
+     
+    }
+    
+    @PutMapping("/decline/{bookingId}")
+    public ResponseEntity<Booking> declineBooking(@PathVariable Long bookingId) {
+        Booking updated = bookingService.updateBookingStatus(bookingId, "declined");
+        return ResponseEntity.ok(updated);
+    }
+
+}

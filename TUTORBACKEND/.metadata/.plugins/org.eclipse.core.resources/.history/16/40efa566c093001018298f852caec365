@@ -1,0 +1,83 @@
+package com.tutorfinder.controller;
+
+import com.tutorfinder.model.User;
+import com.tutorfinder.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:5173")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User user) {
+        User savedUser = userService.registerUser(user);
+
+        // Return response without password
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", savedUser.getId());
+        response.put("name", savedUser.getName());
+        response.put("email", savedUser.getEmail());
+        response.put("phone", savedUser.getPhone());
+        response.put("role", savedUser.getRole());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User loginRequest) {
+        User user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
+        if (user != null) {
+            // ✅ send only safe fields
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", user.getId());       // ✅ important for update/delete
+            response.put("name", user.getName());
+            response.put("email", user.getEmail());
+            response.put("phone", user.getPhone());
+            response.put("role", user.getRole());
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        }
+    }
+
+    // ✅ Update student (or any user)
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        User updated = userService.updateUser(id, updatedUser);
+        if (updated != null) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", updated.getId());
+            response.put("name", updated.getName());
+            response.put("email", updated.getEmail());
+            response.put("phone", updated.getPhone());
+            response.put("role", updated.getRole());
+            return ResponseEntity.ok(response);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        boolean deleted = userService.deleteUser(id);
+        if (deleted) {
+            return ResponseEntity.ok("User deleted successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Spring Boot is running";
+    }
+}

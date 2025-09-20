@@ -1,0 +1,17 @@
+package com.tutorfinder.dto;
+
+
+import com.tutorfinder.model.User;
+import com.tutorfinder.model.TutorProfile;
+import lombok.*;
+
+@Data
+@AllArgsConstruc
+@NoArgsConstructor
+public class BookingResponse {
+    private Long id;
+    private String status;
+    private User student;
+    private TutorProfile tutor;
+}
+

@@ -1,5 +1,6 @@
 package com.tutorfinder.service;
 
+import com.tutorfinder.dto.TutorProfileDTO;
 import com.tutorfinder.model.TutorProfile;
 import com.tutorfinder.model.User;
 import com.tutorfinder.repository.TutorProfileRepository;
@@ -7,7 +8,7 @@ import com.tutorfinder.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class TutorProfileService {
@@ -18,36 +19,68 @@ public class TutorProfileService {
     @Autowired
     private UserRepository userRepository;
 
-    // Create profile only if it doesn't exist
-    public TutorProfile createProfile(Long userId, TutorProfile profile) {
+    public TutorProfile saveOrUpdateProfile(Long userId, TutorProfile profile) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        Optional<TutorProfile> existingProfile = tutorProfileRepository.findByUserId(userId);
-        if (existingProfile.isPresent()) {
-            throw new RuntimeException("Profile already exists for this user");
+        TutorProfile existingProfile = tutorProfileRepository.findByUserId(userId).orElse(null);
+
+        if (existingProfile == null) {
+            profile.setUserId(userId);
+            profile.setName(profile.getName() != null ? profile.getName() : user.getName());
+            profile.setEmail(profile.getEmail() != null ? profile.getEmail() : user.getEmail());
+            return tutorProfileRepository.save(profile);
+        } else {
+            existingProfile.setSubjects(profile.getSubjects());
+            existingProfile.setExperience(profile.getExperience());
+            existingProfile.setBio(profile.getBio());
+            existingProfile.setHourlyRate(profile.getHourlyRate());
+            existingProfile.setLocation(profile.getLocation());
+            existingProfile.setAvailability(profile.getAvailability());
+            existingProfile.setName(profile.getName() != null ? profile.getName() : user.getName());
+            existingProfile.setEmail(profile.getEmail() != null ? profile.getEmail() : user.getEmail());
+            return tutorProfileRepository.save(existingProfile);
+        }
+    }
+
+    public TutorProfileDTO getProfileWithUserInfo(Long userId) {
+        TutorProfile profile = tutorProfileRepository.findByUserId(userId).orElse(null);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (profile == null) {
+            return new TutorProfileDTO(null, user.getName(), user.getEmail(),
+                    null, null, null, null, null, null);
         }
 
-        profile.setUserId(userId);
-        return tutorProfileRepository.save(profile);
+        return new TutorProfileDTO(
+                profile.getId(),
+                profile.getName(),
+                profile.getEmail(),
+                profile.getSubjects(),
+                profile.getExperience(),
+                profile.getBio(),
+                profile.getHourlyRate(),
+                profile.getLocation(),
+                profile.getAvailability()
+        );
     }
 
-    // Update existing profile
-    public TutorProfile updateProfile(Long userId, TutorProfile updatedProfile) {
-        TutorProfile existingProfile = tutorProfileRepository.findByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
-
-        existingProfile.setSubjects(updatedProfile.getSubjects());
-        existingProfile.setExperience(updatedProfile.getExperience());
-        existingProfile.setBio(updatedProfile.getBio());
-        existingProfile.setHourlyRate(updatedProfile.getHourlyRate());
-        existingProfile.setLocation(updatedProfile.getLocation());
-        existingProfile.setAvailability(updatedProfile.getAvailability());
-
-        return tutorProfileRepository.save(existingProfile);
-    }
-
-    public Optional<TutorProfile> getProfile(Long userId) {
-        return tutorProfileRepository.findByUserId(userId);
+    // ✅ New method: Get all tutor profiles
+    public List<TutorProfileDTO> getAllTutorProfiles() {
+        List<TutorProfile> profiles = tutorProfileRepository.findAll();
+        return profiles.stream()
+                .map(profile -> new TutorProfileDTO(
+                        profile.getId(),
+                        profile.getName(),
+                        profile.getEmail(),
+                        profile.getSubjects(),
+                        profile.getExperience(),
+                        profile.getBio(),
+                        profile.getHourlyRate(),
+                        profile.getLocation(),
+                        profile.getAvailability()
+                ))
+                .toList();
     }
 }

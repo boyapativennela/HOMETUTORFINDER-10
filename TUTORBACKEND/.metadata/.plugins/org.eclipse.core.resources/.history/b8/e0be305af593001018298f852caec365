@@ -1,0 +1,67 @@
+@Service
+public class TutorProfileService {
+
+    @Autowired
+    private TutorProfileRepository tutorProfileRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    // Create or update profile
+    public TutorProfile saveOrUpdateProfile(Long userId, TutorProfile profile) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        TutorProfile existingProfile = tutorProfileRepository.findByUserId(userId).orElse(null);
+
+        if (existingProfile == null) {
+            // Create new
+            profile.setUserId(userId);
+            profile.setName(user.getName());
+            profile.setEmail(user.getEmail());
+            return tutorProfileRepository.save(profile);
+        } else {
+            // Update existing
+            existingProfile.setSubjects(profile.getSubjects());
+            existingProfile.setExperience(profile.getExperience());
+            existingProfile.setBio(profile.getBio());
+            existingProfile.setHourlyRate(profile.getHourlyRate());
+            existingProfile.setLocation(profile.getLocation());
+            existingProfile.setAvailability(profile.getAvailability());
+
+            existingProfile.setName(user.getName());
+            existingProfile.setEmail(user.getEmail());
+
+            return tutorProfileRepository.save(existingProfile);
+        }
+    }
+
+    public TutorProfileDTO getProfileWithUserInfo(Long userId) {
+        TutorProfile profile = tutorProfileRepository.findByUserId(userId)
+                .orElse(null);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (profile == null) {
+            // Return empty profile DTO if not created yet
+            return new TutorProfileDTO(
+                    null,
+                    user.getName(),
+                    user.getEmail(),
+                    null, null, null, null, null, null
+            );
+        }
+
+        return new TutorProfileDTO(
+                profile.getId(),
+                user.getName(),
+                user.getEmail(),
+                profile.getSubjects(),
+                profile.getExperience(),
+                profile.getBio(),
+                profile.getHourlyRate(),
+                profile.getLocation(),
+                profile.getAvailability()
+        );
+    }
+}

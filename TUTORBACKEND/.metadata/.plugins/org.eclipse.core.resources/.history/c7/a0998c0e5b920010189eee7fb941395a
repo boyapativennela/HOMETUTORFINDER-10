@@ -1,0 +1,45 @@
+package com.tutorfinder.controller;
+
+import com.tutorfinder.model.Booking;
+import com.tutorfinder.service.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/bookings")
+@CrossOrigin(origins = "http://localhost:5173")
+public class BookingController {
+
+    @Autowired
+    private BookingService bookingService;
+
+    @PostMapping("/book")
+    public ResponseEntity<Booking> bookSession(@RequestBody Booking booking) {
+        booking.setStatus("pending"); // default
+        return ResponseEntity.ok(bookingService.bookSession(booking));
+    }
+
+    // ✅ tutorProfileId from tutor_profiles.id
+    @GetMapping("/tutor/{tutorProfileId}")
+    public ResponseEntity<List<Booking>> getTutorBookings(@PathVariable Long tutorProfileId) {
+        return ResponseEntity.ok(bookingService.getTutorBookings(tutorProfileId));
+    }
+
+    // ✅ studentId from users.id
+    @GetMapping("/student/{studentId}")
+    public ResponseEntity<List<Booking>> getStudentBookings(@PathVariable Long studentId) {
+        return ResponseEntity.ok(bookingService.getStudentBookings(studentId));
+    }
+
+    @PutMapping("/{bookingId}")
+    public ResponseEntity<Booking> updateStatus(
+            @PathVariable Long bookingId,
+            @RequestBody Booking updatedBooking
+    ) {
+        Booking updated = bookingService.updateBookingStatus(bookingId, updatedBooking.getStatus());
+        return ResponseEntity.ok(updated);
+    }
+}

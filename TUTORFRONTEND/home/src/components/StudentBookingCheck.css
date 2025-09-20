@@ -1,0 +1,65 @@
+.student-bookings-container {
+  padding: 2rem;
+  background-color: #1a1a2e; /* dark background */
+  min-height: 100vh;
+  color: #fff; /* white text */
+  font-family: 'Poppins', sans-serif;
+}
+
+.student-bookings-container h2 {
+  color: #d98eff; /* purple highlight */
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.bookings-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background-color: #162447; /* slightly lighter dark table */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bookings-table th,
+.bookings-table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+}
+
+.bookings-table th {
+  background-color: #1f4068; /* dark blue-purple header */
+  color: #f4f4f4;
+}
+
+.bookings-table tr {
+  border-bottom: 1px solid #d98eff33; /* light purple border */
+}
+
+.bookings-table tr:nth-child(even) {
+  background-color: #1f2a47; /* alternate row color */
+}
+
+.bookings-table tr:hover {
+  background-color: #3a0ca3; /* hover effect purple */
+  cursor: pointer;
+  color: #fff;
+}
+
+.bookings-table td {
+  color: #fff;
+}
+
+.student-bookings-container p {
+  text-align: center;
+  margin-top: 2rem;
+  color: #d98eff99;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 1.5rem;
+  color: #d98eff;
+}

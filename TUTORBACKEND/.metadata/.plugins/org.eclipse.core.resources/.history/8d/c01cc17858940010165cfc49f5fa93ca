@@ -1,0 +1,25 @@
+package com.travelbooking.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Booking {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String status; // pending / accepted / declined
+
+    @ManyToOne
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private StudentProfile student;
+
+    @ManyToOne
+    @JoinColumn(name = "tutor_id", referencedColumnName = "id")
+    private TutorProfile tutor;
+}

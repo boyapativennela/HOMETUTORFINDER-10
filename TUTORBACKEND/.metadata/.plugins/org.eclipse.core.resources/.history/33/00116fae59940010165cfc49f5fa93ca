@@ -1,0 +1,47 @@
+@Autowired
+private com.tutorfinder.repository.UserRepository userRepository;
+
+@Autowired
+private TutorProfileRepository tutorProfileRepository;
+
+private BookingResponse mapToResponse(Booking booking) {
+    String studentName = userRepository.findById(booking.getStudentId())
+            .map(u -> u.getName())
+            .orElse("Unknown Student");
+
+    String tutorName = tutorProfileRepository.findById(booking.getTutorId())
+            .map(t -> t.getUser().getName())
+            .orElse("Unknown Tutor");
+
+    return new BookingResponse(
+            booking.getId(),
+            booking.getStatus(),
+            booking.getStudentId(),
+            studentName,
+            booking.getTutorId(),
+            tutorName
+    );
+}
+
+@GetMapping("/tutor/{tutorId}")
+public ResponseEntity<List<BookingResponse>> getTutorBookings(@PathVariable Long tutorId) {
+    List<BookingResponse> responses = bookingService.getTutorBookings(tutorId)
+            .stream()
+            .map(this::mapToResponse)
+            .toList();
+    return ResponseEntity.ok(responses);
+}
+
+@GetMapping("/tutor/user/{userId}")
+public ResponseEntity<List<BookingResponse>> getTutorBookingsByUserId(@PathVariable("userId") Long userId) {
+    TutorProfile profile = tutorProfileRepository.findByUserId(userId)
+            .orElseThrow(() -> new RuntimeException("Tutor profile not found"));
+    Long tutorId = profile.getId();
+
+    List<BookingResponse> responses = bookingService.getTutorBookings(tutorId)
+            .stream()
+            .map(this::mapToResponse)
+            .toList();
+
+    return ResponseEntity.ok(responses);
+}

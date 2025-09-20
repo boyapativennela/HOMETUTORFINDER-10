@@ -15,7 +15,6 @@ const TutorDashboard = () => {
         <ul>
           <li onClick={() => navigate("/tutor-profile")}>👤 My Profile</li>
           <li onClick={() => navigate("/manage-schedule")}>📅 Manage Schedule</li>
-          <li onClick={() => navigate("/my-students")}>🎓 My Students</li>
           <li onClick={() => navigate("/earnings")}>💰 Earnings</li>
         </ul>
       </div>

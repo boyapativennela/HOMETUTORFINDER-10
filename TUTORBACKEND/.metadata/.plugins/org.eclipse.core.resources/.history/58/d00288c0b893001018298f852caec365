@@ -1,0 +1,59 @@
+package com.tutorfinder.controller;
+
+import com.tutorfinder.model.User;
+import com.tutorfinder.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:5173")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/register")
+    public User register(@RequestBody User user) {
+        return userService.registerUser(user);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User loginRequest) {
+        User user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.badRequest().body("Invalid email or password");
+        }
+    }
+
+    // ✅ Update student (or any user)
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        Optional<User> userOpt = userService.findById(id);
+        if (userOpt.isPresent()) {
+            User saved = userService.updateUser(id, updatedUser);
+            return ResponseEntity.ok(saved);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    // ✅ Delete student (or any user)
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        boolean deleted = userService.deleteUser(id);
+        if (deleted) {
+            return ResponseEntity.ok("User deleted successfully");
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Spring Boot is running";
+    }
+}

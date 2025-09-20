@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import FirstPage from "./components/FirstPage";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -7,17 +7,13 @@ import TutorDashBoard from "./components/TutorDashBoard";
 import AdminDashBoard from "./components/AdminDashBoard";
 import ProfileTutor from "./components/ProfileTutor";
 import FindTutors from "./components/FindTutor";
-import TutorManageSchedule from "./components/TutorManageSchedule";
 import Navbar from "./components/Navbar";
 import StudentProfile from "./components/StudentProfile";
-
-function AppWrapper() {
-  return (
-    <Router>
-      <App />
-    </Router>
-  );
-}
+import ViewStudentsAdmin from "./components/ViewStudentsAdmin";
+import ViewTutorAdmin from "./components/ViewTutorAdmin";
+import ManageScheduleTutor from "./components/ManageScheduleTutor";
+import TutorEarnings from "./components/TutorEarnings";
+import StudentBookingCheck from "./components/StudentBookingCheck";
 
 function App() {
   const location = useLocation();
@@ -43,11 +39,15 @@ function App() {
         <Route path="/admin-dashboard" element={<AdminDashBoard />} />
         <Route path="/tutor-profile" element={<ProfileTutor />} />
         <Route path="/find-tutors" element={<FindTutors />} />
-        <Route path="/manage-schedule" element={<TutorManageSchedule />} />
+        <Route path="/manage-schedule" element={<ManageScheduleTutor />} />
         <Route path="/my-profile" element={<StudentProfile />} />
+        <Route path="/view-students" element={<ViewStudentsAdmin />} />
+        <Route path="/view-tutors" element={<ViewTutorAdmin />} />
+        <Route path="/earnings" element={<TutorEarnings />} />
+        <Route path="/my-bookings" element={<StudentBookingCheck />} />
       </Routes>
     </>
   );
 }
 
-export default AppWrapper;
+export default App;

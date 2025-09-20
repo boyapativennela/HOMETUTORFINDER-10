@@ -1,0 +1,41 @@
+package com.tutorfinder.controller;
+
+import com.tutorfinder.dto.TutorProfileDTO;
+import com.tutorfinder.model.TutorProfile;
+import com.tutorfinder.service.TutorProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/tutors/profile")
+@CrossOrigin(origins = "http://localhost:5173")
+public class TutorProfileController {
+
+    @Autowired
+    private TutorProfileService tutorProfileService;
+
+    // ✅ Create or update
+    @PostMapping("/{userId}")
+    public ResponseEntity<TutorProfile> saveProfile(
+            @PathVariable Long userId,
+            @RequestBody TutorProfile profile
+    ) {
+        TutorProfile savedProfile = tutorProfileService.saveOrUpdateProfile(userId, profile);
+        return ResponseEntity.ok(savedProfile);
+    }
+
+    // ✅ Get profile
+    @GetMapping("/{userId}")
+    public ResponseEntity<TutorProfileDTO> getProfile(@PathVariable Long userId) {
+        return ResponseEntity.ok(tutorProfileService.getProfile(userId));
+    }
+
+    // ✅ Get all tutors
+    @GetMapping("/all")
+    public ResponseEntity<List<TutorProfileDTO>> getAllTutors() {
+        return ResponseEntity.ok(tutorProfileService.getAllTutors());
+    }
+}

@@ -1,0 +1,4 @@
+public interface BookingRepository extends JpaRepository<Booking, Long> {
+    List<Booking> findByTutorId(Long tutorId);     // tutor_profiles.id ✅
+    List<Booking> findByStudentId(Long studentId); // users.id ✅
+}

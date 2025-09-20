@@ -1,7 +1,0 @@
-package com.tutorfinder.controller;
-
-
-@RestContro
-public class UserController {
-
-}

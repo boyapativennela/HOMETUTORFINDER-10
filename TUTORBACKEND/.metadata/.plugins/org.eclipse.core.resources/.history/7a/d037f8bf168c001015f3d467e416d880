@@ -1,5 +1,0 @@
-package com.tutorfinder.repository;
-
-public class UserRepository extends JpaRep{
-
-}

@@ -1,0 +1,19 @@
+package com.tutorfinder.controller;
+
+import com.tutorfinder.dto.TutorProfileDTO;
+import com.tutorfinder.model.TutorProfile;
+import com.tutorfinder.service.TutorProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/tutors/profile")
+@CrossOrigin(origins = "http://localhost:5173")
+public class TutorProfileController {
+
+    @Autowired
+    private TutorProfileService tutorProfileService;
+
+    
+}

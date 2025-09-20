@@ -1,45 +1,68 @@
 package com.tutorfinder.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.tutorfinder.model.User;
 import com.tutorfinder.service.UserService;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins="http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
-	
-	@Autowired
-	private UserService userService;
-	
-	@PostMapping("/register")
-	public User register(@RequestBody User user) {
-		return userService.registerUser(user);
-	}
-	
-	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody User loginRequest) {
-	    User user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
-	    if (user != null) {
-	        return ResponseEntity.ok(user); // later you can return JWT instead
-	    } else {
-	        return ResponseEntity.badRequest().body("Invalid email or password");
-	    }
-	}
 
-	
-	@GetMapping("/hello")
+    @Autowired
+    private UserService userService;
+
+    // ✅ Register
+    @PostMapping("/register")
+    public ResponseEntity<User> register(@RequestBody User user) {
+        User registeredUser = userService.registerUser(user);
+        return ResponseEntity.ok(registeredUser);
+    }
+
+    // ✅ Login
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User loginRequest) {
+        User user = userService.loginUser(loginRequest.getEmail(), loginRequest.getPassword());
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.badRequest().body("Invalid email or password");
+        }
+    }
+
+    // ✅ Update user
+    @PutMapping("/update/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable("id") Long id,
+                                           @RequestBody User updatedUser) {
+        return ResponseEntity.ok(userService.updateUser(id, updatedUser));
+    }
+
+    // ✅ Delete user
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("User deleted successfully");
+    }
+    
+ // Get all students
+    @GetMapping("/students")
+    public ResponseEntity<List<User>> getAllStudents() {
+        List<User> students = userService.getAllUsers()
+                                         .stream()
+                                         .filter(u -> "student".equalsIgnoreCase(u.getRole()))
+                                         .toList();
+        return ResponseEntity.ok(students);
+    }
+
+
+    // ✅ Test endpoint
+    @GetMapping("/hello")
     public String hello() {
         return "Spring Boot is running";
     }
-	
-
 }
