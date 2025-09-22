@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./StudentDashboard.css"; // Use the same CSS as StudentDashboard
+import "./TutorDashBoard.css"; // Use the same CSS as StudentDashboard
 
 const TutorDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
