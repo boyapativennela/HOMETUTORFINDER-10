@@ -5,9 +5,14 @@ import Login from "./components/Login";
 import StudentDashBoard from "./components/StudentDashBoard";
 import TutorDashBoard from "./components/TutorDashBoard";
 import AdminDashBoard from "./components/AdminDashBoard";
+import ProfileTutor from "./components/ProfileTutor";
 import FindTutors from "./components/FindTutor";
 import Navbar from "./components/Navbar";
 import StudentProfile from "./components/StudentProfile";
+import ViewStudentsAdmin from "./components/ViewStudentsAdmin";
+import ViewTutorAdmin from "./components/ViewTutorAdmin";
+import ManageScheduleTutor from "./components/ManageScheduleTutor";
+import TutorEarnings from "./components/TutorEarnings";
 import StudentBookingCheck from "./components/StudentBookingCheck";
 
 function App() {
@@ -16,6 +21,8 @@ function App() {
     "/student-dashboard",
     "/tutor-dashboard",
     "/admin-dashboard",
+    "/tutor-profile",
+    "/manage-schedule"
   ];
 
   const showNavbar = !hideNavbarRoutes.includes(location.pathname);
@@ -30,8 +37,13 @@ function App() {
         <Route path="/student-dashboard" element={<StudentDashBoard />} />
         <Route path="/tutor-dashboard" element={<TutorDashBoard />} />
         <Route path="/admin-dashboard" element={<AdminDashBoard />} />
+        <Route path="/tutor-profile" element={<ProfileTutor />} />
         <Route path="/find-tutors" element={<FindTutors />} />
+        <Route path="/manage-schedule" element={<ManageScheduleTutor />} />
         <Route path="/my-profile" element={<StudentProfile />} />
+        <Route path="/view-students" element={<ViewStudentsAdmin />} />
+        <Route path="/view-tutors" element={<ViewTutorAdmin />} />
+        <Route path="/earnings" element={<TutorEarnings />} />
         <Route path="/my-bookings" element={<StudentBookingCheck />} />
       </Routes>
     </>
