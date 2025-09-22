@@ -1,0 +1,122 @@
+/* ManageScheduleTutor.css */
+
+/* Container */
+.schedule-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #1c1c2e; /* dark background */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  color: #e0e0e0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Header */
+.schedule-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #d39fff; /* light purple */
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/* Loading / Login Messages */
+.loading,
+.login-msg {
+  text-align: center;
+  font-size: 18px;
+  color: #ffb3c1; /* soft pink for messages */
+  margin-top: 50px;
+}
+
+/* Table */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.schedule-table th,
+.schedule-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+.schedule-table th {
+  background: #2b2b44; /* darker header */
+  color: #ffb3c1; /* pink headers */
+  font-size: 16px;
+}
+
+.schedule-table td {
+  background: #1f1f30; /* dark row */
+  color: #e0e0e0;
+  font-size: 14px;
+}
+
+/* Table row hover */
+.schedule-table tbody tr:hover {
+  background: #2e2e50;
+  transition: background 0.3s;
+}
+
+/* Buttons */
+.accept-btn,
+.decline-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.accept-btn {
+  background: #8aff8a; /* green */
+  color: #1b1b1b;
+  margin-right: 6px;
+}
+
+.accept-btn:hover {
+  background: #6fd96f;
+}
+
+.decline-btn {
+  background: #ff6b6b; /* red */
+  color: #1b1b1b;
+}
+
+.decline-btn:hover {
+  background: #e05555;
+}
+
+/* Status text */
+.schedule-table td span {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: capitalize;
+  background: #444468; /* muted status background */
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .schedule-container {
+    padding: 15px;
+  }
+
+  .schedule-table th,
+  .schedule-table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .accept-btn,
+  .decline-btn {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+}
