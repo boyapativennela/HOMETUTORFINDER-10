@@ -1,7 +1,7 @@
 services:
-  mysqldb:
+  mysqldbs:
     image: mysql:8
-    container_name: mysql-db
+    container_name: mysql-pro
     environment:
       MYSQL_ROOT_PASSWORD: Honey426@$
       MYSQL_DATABASE: tutorfinder
@@ -18,14 +18,14 @@ services:
     ports:
       - "2025:8082"
     depends_on:
-      - mysqldb
+      - mysqldbs
     restart: on-failure
     networks:
       - springboot-mysql-net
 
   frontend:
     image: lasya06tech/docker-frontend:latest
-    container_name: react
+    container_name: reactpro
     ports:
       - "3002:85"
     depends_on:
