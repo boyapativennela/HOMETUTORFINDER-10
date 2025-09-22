@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./StudentDashboard.css";
+import "./StudentDashBoard.css";
 
 const StudentDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
