@@ -1,5 +1,0 @@
-package com.tutorfinder.model;
-
-import jakarta.persistence.*;
-
-}

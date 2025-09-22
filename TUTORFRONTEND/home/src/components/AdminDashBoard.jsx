@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
+//this is the final project.
 
 const AdminDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
