@@ -27,7 +27,7 @@ services:
     image: lasya06tech/docker-frontend:latest
     container_name: react
     ports:
-      - "3002:80"
+      - "3002:85"
     depends_on:
       - backend
     restart: on-failure
