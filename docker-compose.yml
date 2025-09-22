@@ -24,7 +24,7 @@ services:
       - springboot-mysql-net
 
   frontend:
-    image: rishitha22/docker-frontend:latest
+    image: lasya06tech/docker-frontend:latest
     container_name: react
     ports:
       - "3000:80"
