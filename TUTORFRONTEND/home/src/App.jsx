@@ -5,7 +5,6 @@ import Login from "./components/Login";
 import StudentDashBoard from "./components/StudentDashBoard";
 import TutorDashBoard from "./components/TutorDashBoard";
 import AdminDashBoard from "./components/AdminDashBoard";
-import ProfileTutor from "./components/ProfileTutor";
 import FindTutors from "./components/FindTutor";
 import Navbar from "./components/Navbar";
 import StudentProfile from "./components/StudentProfile";
@@ -14,6 +13,7 @@ import ViewTutorAdmin from "./components/ViewTutorAdmin";
 import ManageScheduleTutor from "./components/ManageScheduleTutor";
 import TutorEarnings from "./components/TutorEarnings";
 import StudentBookingCheck from "./components/StudentBookingCheck";
+import TutorProfile from "./components/TutorProfile";
 
 function App() {
   const location = useLocation();
@@ -37,7 +37,7 @@ function App() {
         <Route path="/student-dashboard" element={<StudentDashBoard />} />
         <Route path="/tutor-dashboard" element={<TutorDashBoard />} />
         <Route path="/admin-dashboard" element={<AdminDashBoard />} />
-        <Route path="/tutor-profile" element={<ProfileTutor />} />
+        <Route path="/tutor-profile" element={<TutorProfile />} />
         <Route path="/find-tutors" element={<FindTutors />} />
         <Route path="/manage-schedule" element={<ManageScheduleTutor />} />
         <Route path="/my-profile" element={<StudentProfile />} />
