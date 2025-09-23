@@ -3,7 +3,7 @@ services:
     image: mysql:8
     container_name: mysql-pro
     environment:
-      MYSQL_ROOT_PASSWORD: Honey426
+      MYSQL_ROOT_PASSWORD: Honey426@$
       MYSQL_DATABASE: tutorfinder
     ports:
       - "3307:3306"
