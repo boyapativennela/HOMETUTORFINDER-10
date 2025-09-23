@@ -3,7 +3,7 @@ services:
     image: mysql:8
     container_name: mysql-pro
     environment:
-      MYSQL_ROOT_PASSWORD: Honey426@$
+      MYSQL_ROOT_PASSWORD: Venni@07
       MYSQL_DATABASE: tutorfinder
     ports:
       - "3307:3306"
@@ -13,7 +13,7 @@ services:
       - springboot-mysql-net
 
   backend:
-    image: lasya06tech/probackend:latest
+    image: boyapativennela/probackend:latest
     container_name: springboot
     ports:
       - "2025:8082"
@@ -24,7 +24,7 @@ services:
       - springboot-mysql-net
 
   frontend:
-    image: lasya06tech/profrontend:latest
+    image: boyapativennela/profrontend:latest
     container_name: reactpro
     ports:
       - "3002:80"
