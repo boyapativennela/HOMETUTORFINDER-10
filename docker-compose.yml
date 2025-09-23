@@ -27,7 +27,7 @@ services:
     image: lasya06tech/profrontend:latest
     container_name: reactpro
     ports:
-      - "3002:85"
+      - "3002:80"
     depends_on:
       - backend
     restart: on-failure
