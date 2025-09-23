@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -61,7 +61,7 @@ public class UserController {
 
 
     // ✅ Test endpoint
-    @GetMapping("/hello")
+    @GetMapping("/")
     public String hello() {
         return "Spring Boot is running";
     }
