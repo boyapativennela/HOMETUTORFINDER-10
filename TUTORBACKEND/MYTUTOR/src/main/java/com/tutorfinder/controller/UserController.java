@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+//final project
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:3002") // allow frontend
+@CrossOrigin("*") // allow frontend urls all
 public class UserController {
 
     @Autowired

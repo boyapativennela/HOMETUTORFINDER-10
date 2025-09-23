@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/tutors/profile")
-@CrossOrigin(origins = "http://localhost:3002") // allow frontend
+@CrossOrigin("*") // allow frontend
 public class TutorProfileController {
 
     @Autowired
