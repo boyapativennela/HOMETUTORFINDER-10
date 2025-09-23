@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Register.css"; // your CSS fill
-import API_BASE_URL from "../config";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 import axios from "axios";
 const Register = () => {
   const [role, setRole] = useState("student");

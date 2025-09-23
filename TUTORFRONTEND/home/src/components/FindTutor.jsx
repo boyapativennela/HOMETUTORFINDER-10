@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import API_BASE_URL from "../config";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 import "./FindTutor.css";
 
 const FindTutors = () => {
