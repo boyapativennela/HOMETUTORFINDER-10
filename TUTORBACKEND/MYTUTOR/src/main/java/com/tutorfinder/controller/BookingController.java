@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/bookings")
-@CrossOrigin("*") // allow your frontend
+@CrossOrigin(origins = "http://localhost:3002") // allow frontend
 public class BookingController {
 
     @Autowired
