@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 //final project
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("api/auth")
 @CrossOrigin("*") // allow frontend urls all
 public class UserController {
 
