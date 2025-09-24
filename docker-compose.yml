@@ -1,10 +1,10 @@
 services:
-  mysqldbs:
+  mysql-pro:
     image: mysql:8
-    container_name: mysql-pro
+    container_name: mysql-db
     environment:
-      MYSQL_ROOT_PASSWORD: Venni@07
-      MYSQL_DATABASE: tutorfinder
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sdpdb
     ports:
       - "3307:3306"
     volumes:
@@ -13,7 +13,7 @@ services:
       - springboot-mysql-net
 
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pVenni@07"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -23,7 +23,7 @@ services:
     image: boyapativennela/probackend:latest
     container_name: springboot
     ports:
-      - "2025:8082"
+      - "2026:2025"
     depends_on:
       - mysqldbs
     restart: on-failure
@@ -34,7 +34,7 @@ services:
     image: boyapativennela/profrontend:latest
     container_name: reactpro
     ports:
-      - "3002:80"
+      - "3000:80"
     depends_on:
       - backend
     restart: on-failure
