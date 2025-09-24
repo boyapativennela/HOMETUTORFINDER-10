@@ -12,7 +12,7 @@ import ViewStudentsAdmin from "./components/ViewStudentsAdmin";
 import ViewTutorAdmin from "./components/ViewTutorAdmin";
 import ManageScheduleTutor from "./components/ManageScheduleTutor";
 import TutorEarnings from "./components/TutorEarnings";
-import StudentBookingCheck from "./components/StudentBookingCheck";
+import StudentBookingCheck from "./components/StudentBookingCheck";    
 import TutorProfile from "./components/TutorProfile";
 
 function App() {
