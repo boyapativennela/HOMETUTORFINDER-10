@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   mysqldbs:
     image: mysql:8
@@ -11,7 +13,6 @@ services:
       - mysql_data:/var/lib/mysql
     networks:
       - springboot-mysql-net
-
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pVenni@07"]
       interval: 10s
@@ -20,6 +21,7 @@ services:
       start_period: 30s
 
   backend:
+    build: ./backend
     image: boyapativennela/probackend:latest
     container_name: springboot
     ports:
@@ -31,6 +33,7 @@ services:
       - springboot-mysql-net
 
   frontend:
+    build: ./frontend
     image: boyapativennela/profrontend:latest
     container_name: reactpro
     ports:

@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "./Register.css";
 import axios from "axios";
 //frontend code 
+
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Register = () => {
+  console.log("API_BASE_URL (in browser):", import.meta.env.VITE_BACKEND_URL);
   const [role, setRole] = useState("student");
   const [formData, setFormData] = useState({
     name: "",
